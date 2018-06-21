@@ -4,6 +4,7 @@ Projeto para construir uma máquina usando Vagrant para trabalhar com AWS Lambda
 # Pré-Requisitos
 
 1 - Vagrant 
+
 2 - Oracle VirtualBox
 
 # Instruções de uso
