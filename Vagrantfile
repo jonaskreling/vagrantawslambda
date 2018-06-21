@@ -15,7 +15,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	
 	# Acesso ip estático
 	config.vm.network "private_network", ip: "192.168.10.10"
-	config.vm.network "forwarded_port", guest: 3000, host: 3000, protocol: "tcp", auto_correct: true
+	config.vm.network "forwarded_port", guest: 80, host: 3000, protocol: "tcp", auto_correct: true
 	
 	# Scripts de instalacao
 	config.vm.provision :shell, :path => "scripts/install.sh"
