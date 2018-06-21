@@ -11,7 +11,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	config.vm.box = "bento/ubuntu-18.04"
 	
 	# Mapeamento da pasta de arquivos
-	config.vm.synced_folder "Code/", "/home/vagrant"
+	config.vm.synced_folder "../", "/home/vagrant"
 	
 	# Acesso ip estático
 	config.vm.network "private_network", ip: "192.168.10.10"

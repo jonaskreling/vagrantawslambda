@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# UPDATE
+# UPDATE REPOSITORIES
 sudo apt-get update
 
 # INSTALL PIP
@@ -23,3 +23,17 @@ sudo usermod -a -G docker vagrant
 
 # INSTALL AWS-SAM-CLI
 pip install aws-sam-cli
+
+# INSTALL GIT
+sudo apt install -y git
+
+# CLONE EXAMPLE
+cd /home/vagrant
+git clone https://github.com/jonaskreling/awslambdaexample.git
+
+# INIT PROJECT EXAMPLE
+cd awslambdaexample
+sam local start-api --host 0.0.0.0
+
+# TEST
+curl http://localhost:3000/products
