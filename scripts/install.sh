@@ -33,7 +33,7 @@ git clone https://github.com/jonaskreling/awslambdaexample.git
 
 # INIT PROJECT EXAMPLE
 cd awslambdaexample
-sam local start-api --host 0.0.0.0
+# sam local start-api --host 0.0.0.0
 
 # TEST
-curl http://localhost:3000/products
+# curl http://localhost:3000/products
