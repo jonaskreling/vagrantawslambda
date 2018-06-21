@@ -13,6 +13,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	# Mapeamento da pasta de arquivos
 	config.vm.synced_folder "Code/", "/home/vagrant"
 	
+	# Acesso ip estático
+	config.vm.network "private_network", ip: "192.168.10.10"
+	
 	# Scripts de instalacao
 	config.vm.provision :shell, :path => "scripts/install.sh"
   
