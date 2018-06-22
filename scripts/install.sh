@@ -32,6 +32,9 @@ echo "Instalação JAVA FINALIZADA!"
 # JAVA END
 ############################################
 
+# GOTO HOME
+cd /home/vagrant/
+
 # INSTALL PIP
 sudo apt-get install -y python-pip
 
