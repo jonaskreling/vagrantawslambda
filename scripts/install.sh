@@ -28,7 +28,7 @@ pip install aws-sam-cli
 sudo apt install -y git
 
 # CLONE EXAMPLE
-cd /home/vagrant
+cd /home/vagrant/Code
 git clone https://github.com/jonaskreling/awslambdaexample.git
 
 # INIT PROJECT EXAMPLE
