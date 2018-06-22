@@ -81,8 +81,9 @@ tar -xvzf dynamodb_local_latest.tar.gz
 # CREATE FILE INIT DYNAMODB
 cat >> dynamodblocal.sh << EOF
 #!/usr/bin/env bash
-chdir /home/vagrant/dynamodb
-exec java -Djava.library.path=. -jar DynamoDBLocal.jar -sharedDb
+sudo chdir /home/vagrant/dynamodb
+sudo chmod u+x DynamoDBLocal.jar
+java -Djava.library.path=. -jar DynamoDBLocal.jar -sharedDb
 EOF
 
 cat >> dynamodblocal.service << EOF
