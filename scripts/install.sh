@@ -91,7 +91,7 @@ exec java -Djava.library.path=. -jar DynamoDBLocal.jar -sharedDb
 EOF
 
 # INIT DYNAMODB
-sudo cp /home/user/dynamodb/dynamodblocal.conf /etc/init/dynamodblocal.conf
+sudo cp /home/vagrant/dynamodb/dynamodblocal.conf /etc/init/dynamodblocal.conf
 sudo service dynamodblocal start
 
 ############################################
