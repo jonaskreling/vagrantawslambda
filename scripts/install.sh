@@ -42,6 +42,9 @@ sudo apt-get install -y python-pip
 sudo apt install -y nodejs
 sudo apt install -y npm
 
+# INSTALL AWS-SDK FOR NODEJS
+npm install aws-sdk
+
 # INSTALL AWS-CLI
 pip install awscli
 
@@ -76,23 +79,31 @@ wget https://s3.ap-south-1.amazonaws.com/dynamodb-local-mumbai/dynamodb_local_la
 tar -xvzf dynamodb_local_latest.tar.gz
 
 # CREATE FILE INIT DYNAMODB
-cat >> dynamodblocal.conf << EOF
-description "DynamoDB Local"
-
-start on (local-filesystems and runlevel [2345])
-stop on runlevel [016]
-
+cat >> dynamodblocal.sh << EOF
+#!/usr/bin/env bash
 chdir /home/vagrant/dynamodb
-
-setuid ubuntu
-setgid ubuntu
-
 exec java -Djava.library.path=. -jar DynamoDBLocal.jar -sharedDb
 EOF
 
+cat >> dynamodblocal.service << EOF
+[Unit]
+Description=DynamoDB Local
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/home/vagrant/dynamodb/dynamodblocal.sh
+RemainAfterExit=true
+StandardOutput=journal
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
 # INIT DYNAMODB
-sudo cp /home/vagrant/dynamodb/dynamodblocal.conf /etc/init/dynamodblocal.conf
-sudo service dynamodblocal start
+sudo cp /home/vagrant/dynamodb/dynamodblocal.service /etc/systemd/system/dynamodblocal.service
+sudo systemctl daemon-reload
+sudo systemctl start dynamodblocal
 
 ############################################
 # DYNAMODB END
