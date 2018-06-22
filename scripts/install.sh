@@ -4,8 +4,33 @@
 sudo add-apt-repository ppa:webupd8team/java
 sudo apt-get update
 
+# INSTALL UNZIP
+sudo apt install unzip
+
+############################################
 # INSTALL JAVA
-sudo apt install -y oracle-java8-set-default
+############################################
+
+# GOTO HOME
+cd /home/vagrant/
+
+# CREATE FOLDER
+mkdir -p oraclejava && cd oraclejava
+
+# CLONE INSTALLER JAVA
+git clone https://github.com/chrishantha/install-java.git
+
+# DOWNLOAD ORACLE JAVA
+wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz
+
+# RUN
+yes | sudo ./install-java/install-java.sh -f ./jdk-8u131-linux-x64.tar.gz
+
+echo "Instalação JAVA FINALIZADA!"
+
+############################################
+# JAVA END
+############################################
 
 # INSTALL PIP
 sudo apt-get install -y python-pip
