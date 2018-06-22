@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
 # UPDATE REPOSITORIES
+sudo add-apt-repository ppa:webupd8team/java
 sudo apt-get update
+
+# INSTALL JAVA
+sudo apt install -y oracle-java8-set-default
 
 # INSTALL PIP
 sudo apt-get install -y python-pip
@@ -26,6 +30,45 @@ pip install aws-sam-cli
 
 # INSTALL GIT
 sudo apt install -y git
+
+############################################
+# INSTALL DYNAMODB AND INIT UBUNTU
+############################################
+
+# GOTO HOME
+cd /home/vagrant/
+
+# CREATE FOLDER
+mkdir -p dynamodb && cd dynamodb
+
+# DOWNLOAD DYNAMODB 
+wget https://s3.ap-south-1.amazonaws.com/dynamodb-local-mumbai/dynamodb_local_latest.tar.gz
+
+# EXTRACT DYNAMODB
+tar -xvzf dynamodb_local_latest.tar.gz
+
+# CREATE FILE INIT DYNAMODB
+cat >> dynamodblocal.conf << EOF
+description "DynamoDB Local"
+
+start on (local-filesystems and runlevel [2345])
+stop on runlevel [016]
+
+chdir /home/vagrant/dynamodb
+
+setuid ubuntu
+setgid ubuntu
+
+exec java -Djava.library.path=. -jar DynamoDBLocal.jar -sharedDb
+EOF
+
+# INIT DYNAMODB
+sudo cp /home/user/dynamodb/dynamodblocal.conf /etc/init/dynamodblocal.conf
+sudo service dynamodblocal start
+
+############################################
+# DYNAMODB END
+############################################
 
 # CLONE EXAMPLE
 cd /home/vagrant/Code
